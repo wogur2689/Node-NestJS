@@ -7,10 +7,14 @@
 <body>
     <h1>이메일을 작성해보세요!</h1>
     <form action="http://localhost:8080/mailSend">
-        <input type="text" name="fromAddress" value="보내는 사람" readonly>
-        <input type="text" name="title" value="제목">
-        <input type="text" name="content" value="제목">
-        <input type="submit">
+        <input type="text" name="fromAddress" value="보내는 사람" readonly><br>
+        <input type="text" name="toUser" value="받는 사람"><br>
+        <input type="text" name="ccUser" value="참조"><br>
+        <input type="text" name="bccUser" value="숨은 참조"><br>
+        <input type="text" name="title" value="제목"><br>
+        <input type="text" name="content" value="내용"><br>
+        <input type="checkbox" name="isUseHtmlYn" value="HTML형식"><br>
+        <input type="submit" value="전송">
     </form>
 </body>
 </html>
