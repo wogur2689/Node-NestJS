@@ -7,8 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PageControlle {
     @GetMapping("/")
-    public ModelAndView index(ModelAndView mav) {
-        mav.setViewName("index.html");
+    public ModelAndView index() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("index");
         return mav;
     }
 }
