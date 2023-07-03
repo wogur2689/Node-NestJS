@@ -26,7 +26,8 @@ public class EmailService {
      * @Description : 이메일주소, 내용, 제목 필수
      */
     @Async
-    public void sendMailSimple(EmailDto emailDto) {
+    public String sendMailSimple(EmailDto emailDto) {
+        String code = "0000";
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
         simpleMailMessage.setTo(emailDto.getToUser());
@@ -39,7 +40,9 @@ public class EmailService {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("메일 전송 오류 : {} ", e.getMessage());
+            code = "0002";
         }
+        return code;
     }
 
     /**
@@ -49,8 +52,8 @@ public class EmailService {
      * @Description : 이메일주소, 내용, 제목 필수
      */
     @Async
-    public void sendMailMime(EmailDto emailDto) {
-
+    public String sendMailMime(EmailDto emailDto) {
+        String code = "0000";
         MimeMessage message = mailSender.createMimeMessage();
 
         try {
@@ -61,7 +64,9 @@ public class EmailService {
             mailSender.send(message);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            log.error("메일 전송 오류 : {} ", e.getMessage());
+            code = "0002";
         }
+        return code;
     }
 }
