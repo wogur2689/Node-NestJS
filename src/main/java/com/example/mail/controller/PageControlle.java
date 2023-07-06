@@ -7,9 +7,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PageControlle {
     @GetMapping("/")
-    public ModelAndView index() {
-        ModelAndView mav = new ModelAndView();
+    public ModelAndView index(ModelAndView mav) {
         mav.setViewName("index");
+        return mav;
+    }
+
+    @GetMapping("/callBack")
+    public ModelAndView callBack(ModelAndView mav) {
+        mav.setViewName("callBack");
         return mav;
     }
 }

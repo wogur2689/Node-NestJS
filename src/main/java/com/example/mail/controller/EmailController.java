@@ -52,7 +52,7 @@ public class EmailController {
         //3, 결과 반환
         mav.addObject("code", code);
         mav.addObject("msg", EmailEnum.getMessage(code));
-        mav.setViewName("jsonView");
+        mav.setViewName("callBack");
         return mav;
     }
 }
