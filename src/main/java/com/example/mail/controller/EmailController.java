@@ -22,10 +22,6 @@ public class EmailController {
 
     /**
      * 메일 보내기
-     * @param mav
-     * @param request
-     * @param result
-     * @return
      */
     @PostMapping("/mailSend")
     public ModelAndView mailSendPost(ModelAndView mav, HttpServletRequest request, BindingResult result) {

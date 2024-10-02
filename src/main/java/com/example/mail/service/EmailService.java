@@ -3,8 +3,9 @@ package com.example.mail.service;
 import com.example.mail.dto.EmailDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
+    @Value("${spring.mail.username}")
+    private String from;
     /**
      * @info : 지정된 주소로 이메일 전송
      * @param : emailDTO
@@ -28,15 +31,17 @@ public class EmailService {
     @Async
     public String sendMailSimple(EmailDto emailDto) {
         String code = "0000";
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-
-        simpleMailMessage.setTo(emailDto.getToUser());
-        simpleMailMessage.setSubject(emailDto.getSubject());
-        simpleMailMessage.setFrom(emailDto.getFromAddress());
-        simpleMailMessage.setText(emailDto.getContent());
 
         try {
-            mailSender.send(simpleMailMessage);
+            MimeMessage m = mailSender.createMimeMessage();
+            MimeMessageHelper h = new MimeMessageHelper(m, "UTF-8");
+
+            h.setTo(emailDto.getToUser());
+            h.setSubject(emailDto.getSubject());
+            h.setFrom(from);
+            h.setText(emailDto.getContent());
+
+            mailSender.send(m);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("메일 전송 오류 : {} ", e.getMessage());

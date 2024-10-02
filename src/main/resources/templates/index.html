@@ -9,11 +9,11 @@
 <body>
     <h1>이메일을 작성해보세요!</h1>
     <form th:action="@{/mailSend}" method="post">
-        보내는 사람 : <input type="text" name="fromAddress" value="jaehyeok.gil@klimsolution.co.kr" readonly><br>
+        보내는 사람 : <input type="text" name="fromAddress" readonly><br>
         받는 사람 : <input type="text" name="toUser"><br>
         참조 : <input type="text" name="ccUser"><br>
         숨은 참조 : <input type="text" name="bccUser"><br>
-        제목 : <input type="text" name="title"><br>
+        제목 : <input type="text" name="subject"><br>
         내용 : <input type="text" name="content"><br>
         HTML형식 : <input type="checkbox" name="isUseHtmlYn"><br>
         <input type="submit" value="전송">
